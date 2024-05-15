@@ -12,7 +12,7 @@ import SwiftData
 struct FeedyApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Feed.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,7 +25,7 @@ struct FeedyApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FeedsList()
         }
         .modelContainer(sharedModelContainer)
     }

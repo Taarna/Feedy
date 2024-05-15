@@ -2,24 +2,25 @@
 //  ContentView.swift
 //  Feedy
 //
-//  Created by Ivana Rast on 15.05.2024..
+//  Created by Ivana Rast on 15.05.2024.
 //
 
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct FeedsList: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
+    @Query private var feeds: [Feed]
+    @State private var isAddFeedViewPresented = false
 
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(items) { item in
+                ForEach(feeds) { feed in
                     NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
+                        Text("\(feed.url)")
                     } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
+                        Text(feed.url)
                     }
                 }
                 .onDelete(perform: deleteItems)
@@ -29,7 +30,9 @@ struct ContentView: View {
                     EditButton()
                 }
                 ToolbarItem {
-                    Button(action: addItem) {
+                    Button(action: {
+                        isAddFeedViewPresented = true
+                    }) {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
@@ -37,25 +40,32 @@ struct ContentView: View {
         } detail: {
             Text("Select an item")
         }
+        .sheet(isPresented: $isAddFeedViewPresented, onDismiss: {
+            
+        }) {
+            AddFeed(isPresented: $isAddFeedViewPresented) { feedURL in
+                add(feedUrl: feedURL)
+            }
+        }
     }
 
-    private func addItem() {
+    private func add(feedUrl url: String) {
         withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
+            let newFeed = Feed(url: url)
+            modelContext.insert(newFeed)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                modelContext.delete(items[index])
+                modelContext.delete(feeds[index])
             }
         }
     }
 }
 
 #Preview {
-    ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+    FeedsList()
+        .modelContainer(for: Feed.self, inMemory: true)
 }
