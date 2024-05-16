@@ -19,12 +19,19 @@ class FeedsListModel {
         
         self.localStorage = localStorage
         self.service = RemoteFeedService(with: localStorage)
+        
+        self.feeds = localStorage.getFeeds()
     }
     
     func add(feedUrl url: String) {
         print("Add feed url")
-        let newFeed = Feed(url: "https://www.kodeco.com/feed")
+        let newFeed = Feed(url: "\(url) - https://www.kodeco.com/feed")
         localStorage.add(feed: newFeed)
+        feeds = localStorage.getFeeds()
+    }
+    
+    func remove(feed: Feed) {
+        localStorage.remove(feed: feed)
         feeds = localStorage.getFeeds()
     }
 }

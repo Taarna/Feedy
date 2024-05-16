@@ -40,4 +40,13 @@ final class LocalFeedStorage: FeedStorage {
         feeds.append(feed)
         save(feeds: feeds)
     }
+    
+    func remove(feed: Feed) {
+        let feedId = feed.id
+        var feeds = getFeeds()
+        feeds.removeAll { feed in
+            feed.id == feedId
+        }
+        save(feeds: feeds)
+    }
 }

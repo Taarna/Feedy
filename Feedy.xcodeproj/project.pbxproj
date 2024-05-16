@@ -69,6 +69,7 @@
 		8D7B8CF82BF564AA008F310B /* Feedy */ = {
 			isa = PBXGroup;
 			children = (
+				8DB450892BF61F26001FCC1A /* Utility */,
 				8DA1385A2BF60AFA00AD7754 /* Storage */,
 				8DA138592BF60A9C00AD7754 /* Service */,
 				8DA138582BF60A8D00AD7754 /* Add Feed */,
@@ -132,6 +133,13 @@
 				8DA138612BF60C2100AD7754 /* LocalFeedStorage.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		8DB450892BF61F26001FCC1A /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

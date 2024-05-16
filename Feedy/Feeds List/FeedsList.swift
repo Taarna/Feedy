@@ -49,6 +49,9 @@ struct FeedsList: View {
     }
 
     private func deleteItems(offsets: IndexSet) {
+        for index in offsets {
+            model.remove(feed: model.feeds[index])
+        }
     }
 }
 
