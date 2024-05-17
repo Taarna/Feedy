@@ -43,7 +43,9 @@ struct FeedsList: View {
             
         }) {
             AddFeed(isPresented: $isAddFeedViewPresented) { feedUrl in
-                model.add(feedUrl: feedUrl)
+                Task {
+                    await model.add(feedUrl: feedUrl)
+                }
             }
         }
     }

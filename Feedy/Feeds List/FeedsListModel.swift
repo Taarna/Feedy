@@ -10,7 +10,7 @@ import Foundation
 @Observable
 class FeedsListModel {
     private var localStorage: LocalFeedStorage
-    private var service: RemoteFeedService
+    private var remoteService: RemoteFeedService
     
     var feeds: [Feed] = []
     
@@ -18,16 +18,22 @@ class FeedsListModel {
         let localStorage = LocalFeedStorage(with: UserDefaults.standard)
         
         self.localStorage = localStorage
-        self.service = RemoteFeedService(with: localStorage)
+        self.remoteService = RemoteFeedService(with: localStorage)
         
         self.feeds = localStorage.getFeeds()
     }
     
-    func add(feedUrl url: String) {
-        print("Add feed url")
-        let newFeed = Feed(url: "\(url) - https://www.kodeco.com/feed")
-        localStorage.add(feed: newFeed)
-        feeds = localStorage.getFeeds()
+    func add(feedUrl url: String) async {
+        if let feedUrl = URL(string: url) {
+            let newFeed = await remoteService.getFeed(with: feedUrl)
+            switch newFeed {
+            case .success(let newFeed):
+                localStorage.add(feed: newFeed)
+                feeds = localStorage.getFeeds()
+            case .failure(let error):
+                print("Error")
+            }
+        }
     }
     
     func remove(feed: Feed) {

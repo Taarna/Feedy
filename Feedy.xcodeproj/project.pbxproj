@@ -20,6 +20,7 @@
 		8DA138622BF60C2100AD7754 /* LocalFeedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA138612BF60C2100AD7754 /* LocalFeedStorage.swift */; };
 		8DA138642BF60ED200AD7754 /* FeedNetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA138632BF60ED200AD7754 /* FeedNetworkingService.swift */; };
 		8DA138662BF60F0500AD7754 /* RemoteFeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA138652BF60F0500AD7754 /* RemoteFeedService.swift */; };
+		8DB4508C2BF62FC8001FCC1A /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB4508B2BF62FC8001FCC1A /* FeedKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB4508C2BF62FC8001FCC1A /* FeedKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -158,6 +160,9 @@
 			dependencies = (
 			);
 			name = Feedy;
+			packageProductDependencies = (
+				8DB4508B2BF62FC8001FCC1A /* FeedKit */,
+			);
 			productName = Feedy;
 			productReference = 8D7B8CF62BF564AA008F310B /* Feedy.app */;
 			productType = "com.apple.product-type.application";
@@ -186,6 +191,9 @@
 				Base,
 			);
 			mainGroup = 8D7B8CED2BF564AA008F310B;
+			packageReferences = (
+				8DB4508A2BF62FC8001FCC1A /* XCRemoteSwiftPackageReference "FeedKit" */,
+			);
 			productRefGroup = 8D7B8CF72BF564AA008F310B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -428,6 +436,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8DB4508A2BF62FC8001FCC1A /* XCRemoteSwiftPackageReference "FeedKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nmdias/FeedKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.1.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8DB4508B2BF62FC8001FCC1A /* FeedKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DB4508A2BF62FC8001FCC1A /* XCRemoteSwiftPackageReference "FeedKit" */;
+			productName = FeedKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8D7B8CEE2BF564AA008F310B /* Project object */;
 }
