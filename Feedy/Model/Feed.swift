@@ -10,4 +10,7 @@ import Foundation
 struct Feed: Codable, Identifiable {
     var id = UUID()
     var url: String
+    var title: String
+    var description: String?
+    var imageURL: URL?
 }

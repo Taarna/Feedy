@@ -16,11 +16,7 @@ struct FeedsList: View {
         NavigationSplitView {
             List {
                 ForEach(model.feeds) { feed in
-                    NavigationLink {
-                        Text("\(feed.url)")
-                    } label: {
-                        Text(feed.url)
-                    }
+                    FeedRow(feed: feed)
                 }
                 .onDelete(perform: deleteItems)
             }
@@ -35,6 +31,7 @@ struct FeedsList: View {
                         Label("Add Item", systemImage: "plus")
                     }
                 }
+                
             }
         } detail: {
             Text("Select an item")
@@ -43,16 +40,30 @@ struct FeedsList: View {
             
         }) {
             AddFeed(isPresented: $isAddFeedViewPresented) { feedUrl in
-                Task {
-                    await model.add(feedUrl: feedUrl)
-                }
+                addFeed(url: feedUrl)
             }
+        }
+    }
+    
+    private func addFeed(url: String) {
+        Task {
+            await model.add(feedUrl: url)
         }
     }
 
     private func deleteItems(offsets: IndexSet) {
         for index in offsets {
             model.remove(feed: model.feeds[index])
+        }
+    }
+}
+
+struct FeedItems: View {
+    let feed: Feed
+    
+    var body: some View {
+        VStack {
+            Text("\(feed.url)")
         }
     }
 }

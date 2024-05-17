@@ -31,12 +31,14 @@ final class RemoteFeedService: FeedNetworkingService {
                 switch result {
                 case .success(let feed):
                     if let atomFeed = feed.atomFeed {
-                        continuation.resume(returning: .success(Feed(url: atomFeed.title ?? "")))
+                        continuation.resume(returning: .success(atomFeed.toFeed()))
                     } else if let rssFeed = feed.rssFeed {
-                        continuation.resume(returning: .success(Feed(url: rssFeed.title ?? "")))
-                    } else if let jsonFeed = feed.jsonFeed {
-                        continuation.resume(returning: .success(Feed(url: jsonFeed.title ?? "")))
-                    } else {
+                        continuation.resume(returning: .success(rssFeed.toFeed()))
+                    }
+//                    else if let jsonFeed = feed.jsonFeed {
+//                        continuation.resume(returning: .success(jsonFeed.toFeed()))
+//                    }
+                    else {
                         continuation.resume(returning: .failure(RemoteServiceError.parseError))
                     }
                 case .failure(let error):
@@ -46,3 +48,40 @@ final class RemoteFeedService: FeedNetworkingService {
         }
     }
 }
+
+protocol FeedConvertible {
+    func toFeed() -> Feed
+}
+
+extension AtomFeed: FeedConvertible {
+    func toFeed() -> Feed {
+        return Feed(
+            url: self.links?.first?.attributes?.href ?? "",
+            title: self.title ?? "",
+            description: self.subtitle?.value ?? "",
+            imageURL: URL(string: self.logo ?? "")
+        )
+    }
+}
+
+extension RSSFeed: FeedConvertible {
+    func toFeed() -> Feed {
+        return Feed(
+            url: self.link ?? "",
+            title: self.title ?? "",
+            description: self.description,
+            imageURL: URL(string: self.image?.url ?? "")
+        )
+    }
+}
+
+//extension JSONFeed: FeedConvertible {
+//    func toFeed() -> Feed {
+//        return Feed(
+//            url: self.homePageURL ?? "",
+//            title: self.title ?? "",
+//            description: self.description,
+//            imageURL: URL(string: self.icon ?? "")
+//        )
+//    }
+//}
