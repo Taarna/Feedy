@@ -25,8 +25,8 @@ struct FeedRow: View {
                     }
                     .frame(width: 30, height: 30)
                 } else {
-                    SVGView(contentsOf: Bundle.main.url(forResource: "rss-logo", withExtension: "svg")!)
-                        .frame(width: 30, height: 30)
+                    let logoURL = Bundle.main.url(forResource: "rss-logo", withExtension: "svg")!
+                    SVGView(contentsOf: logoURL).frame(width: 30, height: 30)
                 }
                 VStack(alignment: .leading) {
                     Text(feed.title).font(.headline)
