@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct FeedItemsList: View {
-    
-//    let feedItems: [FeedItem]
+    let feed: Feed
     
     var body: some View {
-        VStack {
-            Text("Ja sam feed item")
+        List(feed.items) { item in
+            VStack(alignment: .leading) {
+                Text(item.title).font(.headline)
+                if let description = item.description {
+                    Text(description).font(.subheadline)
+                }
+            }
         }
+        .navigationTitle(feed.title)
     }
-}
-
-#Preview {
-    FeedItemsList()
 }

@@ -13,4 +13,5 @@ struct Feed: Codable, Identifiable {
     var title: String
     var description: String?
     var imageURL: URL?
+    var items: [FeedItem]
 }

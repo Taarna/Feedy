@@ -59,7 +59,14 @@ extension AtomFeed: FeedConvertible {
             url: self.links?.first?.attributes?.href ?? "",
             title: self.title ?? "",
             description: self.subtitle?.value ?? "",
-            imageURL: URL(string: self.logo ?? "")
+            imageURL: URL(string: self.logo ?? ""),
+            items: self.entries?.map { entry in
+                FeedItem(
+                    title: entry.title ?? "",
+                    description: entry.summary?.value ?? "",
+                    imageURL: entry.links?.first?.attributes?.href.flatMap(URL.init(string:))
+                )
+            } ?? []
         )
     }
 }
@@ -70,7 +77,14 @@ extension RSSFeed: FeedConvertible {
             url: self.link ?? "",
             title: self.title ?? "",
             description: self.description,
-            imageURL: URL(string: self.image?.url ?? "")
+            imageURL: URL(string: self.image?.url ?? ""),
+            items: self.items?.map { item in
+                FeedItem(
+                    title: item.title ?? "",
+                    description: item.description,
+                    imageURL: item.link.flatMap(URL.init(string:))
+                )
+            } ?? []
         )
     }
 }
