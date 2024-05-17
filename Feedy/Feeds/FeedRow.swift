@@ -13,7 +13,7 @@ struct FeedRow: View {
     
     var body: some View {
         ZStack(alignment: .leading) {
-            NavigationLink(destination: FeedItems(feed: feed)) {
+            NavigationLink(destination: FeedItemsList()) {
                 EmptyView()
             }.opacity(0)
             HStack {

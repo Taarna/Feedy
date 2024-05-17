@@ -7,19 +7,15 @@
 
 import Foundation
 
-@Observable
-class FeedsListModel {
+class DataModel: ObservableObject {
     private var localStorage: LocalFeedStorage
     private var remoteService: RemoteFeedService
     
-    var feeds: [Feed] = []
+    @Published private(set) var feeds: [Feed]
     
-    init() {
-        let localStorage = LocalFeedStorage(with: UserDefaults.standard)
-        
+    init(with localStorage: LocalFeedStorage, remoteService: RemoteFeedService) {
         self.localStorage = localStorage
-        self.remoteService = RemoteFeedService(with: localStorage)
-        
+        self.remoteService = remoteService
         self.feeds = localStorage.getFeeds()
     }
     

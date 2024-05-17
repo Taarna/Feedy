@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct FeedsList: View {
+    @EnvironmentObject private var model: DataModel
     @State private var isAddFeedViewPresented = false
     
-    private var model = FeedsListModel()
-
     var body: some View {
         NavigationSplitView {
             List {
                 ForEach(model.feeds) { feed in
                     FeedRow(feed: feed)
                 }
-                .onDelete(perform: deleteItems)
+                .onDelete(perform: deleteFeeds)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -51,23 +50,9 @@ struct FeedsList: View {
         }
     }
 
-    private func deleteItems(offsets: IndexSet) {
+    private func deleteFeeds(offsets: IndexSet) {
         for index in offsets {
             model.remove(feed: model.feeds[index])
         }
     }
-}
-
-struct FeedItems: View {
-    let feed: Feed
-    
-    var body: some View {
-        VStack {
-            Text("\(feed.url)")
-        }
-    }
-}
-
-#Preview {
-    FeedsList()
 }
