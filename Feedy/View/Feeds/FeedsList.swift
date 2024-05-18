@@ -28,7 +28,7 @@ struct FeedsList: View {
                         ForEach(favoriteFeeds, id: \.id) { favoriteFeed in
                             FeedCell(feed: favoriteFeed)
                         }
-                        .onDelete(perform: deleteFeeds)
+                        .onDelete(perform: deleteFavoriteFeeds)
                     }
                 }
                 Section("") {
@@ -72,6 +72,12 @@ struct FeedsList: View {
     private func deleteFeeds(offsets: IndexSet) {
         for index in offsets {
             dataModel.remove(feed: feeds[index], fromContext: modelContext)
+        }
+    }
+    
+    private func deleteFavoriteFeeds(offsets: IndexSet) {
+        for index in offsets {
+            dataModel.remove(feed: favoriteFeeds[index], fromContext: modelContext)
         }
     }
 }
