@@ -20,7 +20,7 @@ struct FeedsList: View {
         NavigationSplitView {
             List {
                 ForEach(feeds) { feed in
-                    FeedRow(feed: feed)
+                    FeedCell(feed: feed)
                 }
                 .onDelete(perform: deleteFeeds)
             }
