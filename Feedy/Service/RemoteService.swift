@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol FeedNetworkingService {
+protocol RemoteService {
     func getFeed(with url: URL) async -> Result<Feed, Error>
 }

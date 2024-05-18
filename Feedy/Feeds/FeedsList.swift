@@ -6,15 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct FeedsList: View {
-    @EnvironmentObject private var model: DataModel
+    @Environment(\.modelContext) private var modelContext
+    @Environment(DataModel.self) private var dataModel
+    
+    @Query private var feeds: [Feed]
+    
     @State private var isAddFeedViewPresented = false
     
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(model.feeds) { feed in
+                ForEach(feeds) { feed in
                     FeedRow(feed: feed)
                 }
                 .onDelete(perform: deleteFeeds)
@@ -38,21 +43,21 @@ struct FeedsList: View {
         .sheet(isPresented: $isAddFeedViewPresented, onDismiss: {
             
         }) {
-            AddFeed(isPresented: $isAddFeedViewPresented) { feedUrl in
-                addFeed(url: feedUrl)
+            AddFeed(isPresented: $isAddFeedViewPresented) { feedURL in
+                addFeed(withURL: feedURL)
             }
         }
     }
     
-    private func addFeed(url: String) {
+    private func addFeed(withURL url: String) {
         Task {
-            await model.add(feedUrl: url)
+            await dataModel.add(feedUrl: url, into: modelContext)
         }
     }
-
+    
     private func deleteFeeds(offsets: IndexSet) {
         for index in offsets {
-            model.remove(feed: model.feeds[index])
+            dataModel.remove(feed: feeds[index], fromContext: modelContext)
         }
     }
 }

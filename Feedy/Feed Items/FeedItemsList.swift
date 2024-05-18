@@ -11,11 +11,13 @@ struct FeedItemsList: View {
     let feed: Feed
     
     var body: some View {
-        List(feed.items) { item in
-            VStack(alignment: .leading) {
-                Text(item.title).font(.headline)
-                if let description = item.description {
-                    Text(description).font(.subheadline)
+        List {
+            ForEach(feed.items) { feedItem in
+                VStack(alignment: .leading) {
+                    Text(feedItem.title).font(.headline)
+                    if let details = feedItem.details {
+                        Text(details).font(.subheadline)
+                    }
                 }
             }
         }

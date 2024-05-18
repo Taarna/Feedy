@@ -30,8 +30,8 @@ struct FeedRow: View {
                 }
                 VStack(alignment: .leading) {
                     Text(feed.title).font(.headline)
-                    if let description = feed.description {
-                        Text(description).font(.subheadline)
+                    if let details = feed.details {
+                        Text(details).font(.subheadline)
                     }
                 }
             }

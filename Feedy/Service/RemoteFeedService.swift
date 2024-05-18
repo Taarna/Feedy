@@ -15,13 +15,7 @@ enum RemoteServiceError: Error {
     case unknownError
 }
 
-final class RemoteFeedService: FeedNetworkingService {
-    
-    private var feedStorage: FeedStorage!
-    
-    init(with feedStorage: FeedStorage) {
-        self.feedStorage = feedStorage
-    }
+final class RemoteFeedService: RemoteService {
     
     func getFeed(with url: URL) async -> Result<Feed, Error> {
         let parser = FeedParser(URL: url)
@@ -58,12 +52,12 @@ extension AtomFeed: FeedConvertible {
         return Feed(
             url: self.links?.first?.attributes?.href ?? "",
             title: self.title ?? "",
-            description: self.subtitle?.value ?? "",
+            details: self.subtitle?.value ?? "",
             imageURL: URL(string: self.logo ?? ""),
             items: self.entries?.map { entry in
                 FeedItem(
                     title: entry.title ?? "",
-                    description: entry.summary?.value ?? "",
+                    details: entry.summary?.value ?? "",
                     imageURL: entry.links?.first?.attributes?.href.flatMap(URL.init(string:))
                 )
             } ?? []
@@ -76,12 +70,12 @@ extension RSSFeed: FeedConvertible {
         return Feed(
             url: self.link ?? "",
             title: self.title ?? "",
-            description: self.description,
+            details: self.description,
             imageURL: URL(string: self.image?.url ?? ""),
             items: self.items?.map { item in
                 FeedItem(
                     title: item.title ?? "",
-                    description: item.description,
+                    details: item.description,
                     imageURL: item.link.flatMap(URL.init(string:))
                 )
             } ?? []
