@@ -11,7 +11,7 @@ import SVGView
 struct FeedCell: View {
     let feed: Feed
     
-    @State private var isFavorited = false
+    @State private var isFavorite = false
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -23,7 +23,7 @@ struct FeedCell: View {
                 Button(action: {
                     toggleFavorited()
                 }) {
-                    Image(systemName: feed.isFavorited ? "heart.fill" : "heart")
+                    Image(systemName: feed.isFavorite ? "heart.fill" : "heart")
                         .foregroundColor(Color.accentColor)
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -33,6 +33,6 @@ struct FeedCell: View {
     }
     
     private func toggleFavorited() {
-        feed.isFavorited.toggle()
+        feed.isFavorite.toggle()
     }
 }

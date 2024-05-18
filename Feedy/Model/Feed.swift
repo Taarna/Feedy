@@ -16,7 +16,7 @@ final class Feed {
     var details: String?
     var imageURL: URL?
     var items: [FeedItem]
-    var isFavorited: Bool
+    var isFavorite: Bool
     
     init(
         id: UUID = UUID(),
@@ -32,6 +32,6 @@ final class Feed {
             self.imageURL = imageURL
             self.items = items
             
-            self.isFavorited = false
+            self.isFavorite = false
         }
 }

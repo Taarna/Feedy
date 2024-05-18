@@ -12,17 +12,31 @@ struct FeedsList: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DataModel.self) private var dataModel
     
-    @Query private var feeds: [Feed]
+    @Query(filter: #Predicate<Feed>  { !$0.isFavorite })
+    private var feeds: [Feed]
+    
+    @Query(filter: #Predicate<Feed>  { $0.isFavorite })
+    private var favoriteFeeds: [Feed]
     
     @State private var isAddFeedViewPresented = false
     
     var body: some View {
         NavigationSplitView {
             List {
-                ForEach(feeds) { feed in
-                    FeedCell(feed: feed)
+                if(favoriteFeeds.count > 0) {
+                    Section("Favorites") {
+                        ForEach(favoriteFeeds, id: \.id) { favoriteFeed in
+                            FeedCell(feed: favoriteFeed)
+                        }
+                        .onDelete(perform: deleteFeeds)
+                    }
                 }
-                .onDelete(perform: deleteFeeds)
+                Section("") {
+                    ForEach(feeds, id: \.id) { feed in
+                        FeedCell(feed: feed)
+                    }
+                    .onDelete(perform: deleteFeeds)
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
