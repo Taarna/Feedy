@@ -22,6 +22,8 @@
 		8DA138642BF60ED200AD7754 /* RemoteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA138632BF60ED200AD7754 /* RemoteService.swift */; };
 		8DA138662BF60F0500AD7754 /* RemoteFeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA138652BF60F0500AD7754 /* RemoteFeedService.swift */; };
 		8DB4508C2BF62FC8001FCC1A /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8DB4508B2BF62FC8001FCC1A /* FeedKit */; };
+		8DF900AB2BF8EEA800561B31 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF900AA2BF8EEA800561B31 /* WebView.swift */; };
+		8DF900AD2BF8EEE500561B31 /* FeedItemDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF900AC2BF8EEE500561B31 /* FeedItemDetails.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		8DA1384E2BF5EAB400AD7754 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		8DA138632BF60ED200AD7754 /* RemoteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteService.swift; sourceTree = "<group>"; };
 		8DA138652BF60F0500AD7754 /* RemoteFeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedService.swift; sourceTree = "<group>"; };
+		8DF900AA2BF8EEA800561B31 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		8DF900AC2BF8EEE500561B31 /* FeedItemDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemDetails.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 				8DA138572BF60A7400AD7754 /* Feeds */,
 				8DA138582BF60A8D00AD7754 /* Add Feed */,
 				8D8F923C2BF7855A00880025 /* Feed Items */,
+				8DF900A92BF8EE8A00561B31 /* Feed Item Details */,
 				8D7B8CF92BF564AA008F310B /* FeedyApp.swift */,
 				8D7B8CFF2BF564AE008F310B /* Assets.xcassets */,
 				8D7B8D012BF564AE008F310B /* Preview Content */,
@@ -124,8 +129,8 @@
 		8DA138572BF60A7400AD7754 /* Feeds */ = {
 			isa = PBXGroup;
 			children = (
-				8D8F92382BF77E9900880025 /* FeedRow.swift */,
 				8D7B8CFB2BF564AA008F310B /* FeedsList.swift */,
+				8D8F92382BF77E9900880025 /* FeedRow.swift */,
 			);
 			path = Feeds;
 			sourceTree = "<group>";
@@ -152,6 +157,15 @@
 			children = (
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		8DF900A92BF8EE8A00561B31 /* Feed Item Details */ = {
+			isa = PBXGroup;
+			children = (
+				8DF900AA2BF8EEA800561B31 /* WebView.swift */,
+				8DF900AC2BF8EEE500561B31 /* FeedItemDetails.swift */,
+			);
+			path = "Feed Item Details";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D7B8CFC2BF564AA008F310B /* FeedsList.swift in Sources */,
+				8DF900AD2BF8EEE500561B31 /* FeedItemDetails.swift in Sources */,
 				8DA138662BF60F0500AD7754 /* RemoteFeedService.swift in Sources */,
 				8D8F923E2BF7878B00880025 /* FeedItemsList.swift in Sources */,
 				8D7B8D0A2BF5667E008F310B /* Feed.swift in Sources */,
@@ -243,6 +258,7 @@
 				8D7B8CFA2BF564AA008F310B /* FeedyApp.swift in Sources */,
 				8D039E102BF7AD80005C894A /* FeedItem.swift in Sources */,
 				8DA138642BF60ED200AD7754 /* RemoteService.swift in Sources */,
+				8DF900AB2BF8EEA800561B31 /* WebView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

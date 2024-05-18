@@ -14,15 +14,18 @@ final class FeedItem {
     var title: String
     var details: String?
     var imageURL: URL?
+    var link: URL?
     
     init(
         id: UUID = UUID(),
         title: String,
         details: String? = nil,
-        imageURL: URL? = nil) {
+        imageURL: URL? = nil,
+        link: URL? = nil) {
             self.id = id
             self.title = title
             self.details = details
             self.imageURL = imageURL
+            self.link = link
         }
 }

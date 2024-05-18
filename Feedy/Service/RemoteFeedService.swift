@@ -58,7 +58,8 @@ extension AtomFeed: FeedConvertible {
                 FeedItem(
                     title: entry.title ?? "",
                     details: entry.summary?.value ?? "",
-                    imageURL: entry.links?.first?.attributes?.href.flatMap(URL.init(string:))
+                    imageURL: entry.links?.first?.attributes?.href.flatMap(URL.init(string:)),
+                    link: entry.links?.first?.attributes?.href.flatMap(URL.init(string:))
                 )
             } ?? []
         )
@@ -76,7 +77,8 @@ extension RSSFeed: FeedConvertible {
                 FeedItem(
                     title: item.title ?? "",
                     details: item.description,
-                    imageURL: item.link.flatMap(URL.init(string:))
+                    imageURL: item.link.flatMap(URL.init(string:)),
+                    link: item.link.flatMap(URL.init(string:))
                 )
             } ?? []
         )
