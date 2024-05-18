@@ -81,11 +81,9 @@
 		8D7B8CF82BF564AA008F310B /* Feedy */ = {
 			isa = PBXGroup;
 			children = (
-				8DF900AE2BF8FFB300561B31 /* New Group */,
 				8D8F92332BF7784A00880025 /* Assets */,
 				8DA138562BF60A6500AD7754 /* Model */,
 				8DA138592BF60A9C00AD7754 /* Service */,
-				8DB450892BF61F26001FCC1A /* Utility */,
 				8DF900AF2BF900D700561B31 /* View */,
 				8D7B8CF92BF564AA008F310B /* FeedyApp.swift */,
 				8D7B8CFF2BF564AE008F310B /* Assets.xcassets */,
@@ -116,8 +114,7 @@
 				8D8F923D2BF7878B00880025 /* FeedItemsList.swift */,
 				8DF900B42BF90B4B00561B31 /* FeedItemCell.swift */,
 			);
-			name = "Feed Items";
-			path = "../../View/Feed Items";
+			path = "Feed Items";
 			sourceTree = "<group>";
 		};
 		8DA138562BF60A6500AD7754 /* Model */ = {
@@ -136,8 +133,7 @@
 				8D7B8CFB2BF564AA008F310B /* FeedsList.swift */,
 				8D8F92382BF77E9900880025 /* FeedCell.swift */,
 			);
-			name = Feeds;
-			path = ../../View/Feeds;
+			path = Feeds;
 			sourceTree = "<group>";
 		};
 		8DA138582BF60A8D00AD7754 /* Add Feed */ = {
@@ -145,8 +141,7 @@
 			children = (
 				8D7B8D0B2BF56DA2008F310B /* AddFeed.swift */,
 			);
-			name = "Add Feed";
-			path = "../../View/Add Feed";
+			path = "Add Feed";
 			sourceTree = "<group>";
 		};
 		8DA138592BF60A9C00AD7754 /* Service */ = {
@@ -158,28 +153,13 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		8DB450892BF61F26001FCC1A /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
 		8DF900A92BF8EE8A00561B31 /* Feed Item Details */ = {
 			isa = PBXGroup;
 			children = (
 				8DF900AA2BF8EEA800561B31 /* WebView.swift */,
 				8DF900AC2BF8EEE500561B31 /* FeedItemDetails.swift */,
 			);
-			name = "Feed Item Details";
-			path = "../../View/Feed Item Details";
-			sourceTree = "<group>";
-		};
-		8DF900AE2BF8FFB300561B31 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
+			path = "Feed Item Details";
 			sourceTree = "<group>";
 		};
 		8DF900AF2BF900D700561B31 /* View */ = {
@@ -191,8 +171,7 @@
 				8D8F923C2BF7855A00880025 /* Feed Items */,
 				8DF900A92BF8EE8A00561B31 /* Feed Item Details */,
 			);
-			name = View;
-			path = "Feed Items/View";
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
