@@ -15,7 +15,7 @@ final class Feed {
     var title: String
     var details: String?
     var imageURL: URL?
-    var items: [FeedItem]
+    @Relationship(deleteRule: .cascade, inverse: \FeedItem.feed) var items: [FeedItem] = [FeedItem]()
     var isFavorite: Bool
     
     init(
@@ -31,7 +31,6 @@ final class Feed {
             self.details = details
             self.imageURL = imageURL
             self.items = items
-            
             self.isFavorite = false
         }
 }

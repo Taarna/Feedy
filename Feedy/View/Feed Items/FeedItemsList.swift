@@ -9,6 +9,8 @@ import SwiftUI
 import SVGView
 
 struct FeedItemsList: View {
+    @Environment(DataModel.self) private var dataModel
+    
     let feed: Feed
     
     var body: some View {
@@ -23,5 +25,10 @@ struct FeedItemsList: View {
             }
         }
         .navigationTitle(feed.title)
+        .onAppear() {
+            Task {
+                await dataModel.refreshFeed(feed: feed)
+            }
+        }
     }
 }

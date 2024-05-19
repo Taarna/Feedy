@@ -10,17 +10,17 @@ import SwiftData
 
 @main
 struct FeedyApp: App {
-    @State private var dataModel: DataModel
+    @StateObject private var dataModel: DataModel
     
     init() {
-//        let localStorage = LocalFeedStorage(with: UserDefaults.standard)
         let remoteService = RemoteFeedService()
-        self.dataModel = DataModel(with: remoteService)
+        _dataModel = StateObject(wrappedValue: DataModel(with: remoteService))
     }
     
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Feed.self,
+            FeedItem.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -33,7 +33,8 @@ struct FeedyApp: App {
     
     var body: some Scene {
         WindowGroup {
-            FeedsList().environment(dataModel)
+            FeedsList()
+                .environment(dataModel)
         }
         .modelContainer(sharedModelContainer)
     }
