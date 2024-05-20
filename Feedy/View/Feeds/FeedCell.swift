@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct FeedCell: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     let feed: Feed
     
     @State private var isFavorite = false
@@ -23,7 +25,7 @@ struct FeedCell: View {
                     toggleFavorited()
                 }) {
                     Image(systemName: feed.isFavorite ? "heart.fill" : "heart")
-                        .foregroundColor(Color.accentColor)
+                        .foregroundColor(colorScheme == .light ? .black : .white)
                 }
                 .buttonStyle(PlainButtonStyle())
                 .padding(5.0)

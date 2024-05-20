@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct BaseCell: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     let imageURL: URL?
     let title: String
     let details: String?
@@ -32,7 +34,7 @@ struct BaseCell: View {
                     .frame(width: imageSize, height: imageSize)
                     .aspectRatio(contentMode: .fill)
                     .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .foregroundColor(Color.accentColor)
+                    .foregroundColor(colorScheme == .light ? .black : .white)
             }
             Spacer()
             VStack(alignment: .leading) {
