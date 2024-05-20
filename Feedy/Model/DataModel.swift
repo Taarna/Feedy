@@ -25,7 +25,7 @@ class DataModel: ObservableObject {
         let result = await remoteService.getFeed(with: feedURL)
         switch result {
         case .success(let newFeed):
-            insert(newFeed: newFeed, fromURL: url, into: context)
+            insert(newFeed: newFeed, fromURL: feedURL, into: context)
         case .failure(let error):
             throw error
         }
@@ -35,19 +35,21 @@ class DataModel: ObservableObject {
         context.delete(feed)
     }
     
-    func refreshFeed(feed: Feed) async {
-        if let feedURL = URL(string: feed.url) {
-            let result = await remoteService.getFeed(with: feedURL)
-            switch result {
-            case .success(let newFeed):
-                update(feed: feed, to: newFeed)
-            case .failure(let error):
-                print("Error")
-            }
+    func refresh(feed: Feed) async throws {
+        guard let feedURL = feed.url else {
+            throw FeedyError.incorrectURL
+        }
+        
+        let result = await remoteService.getFeed(with: feedURL)
+        switch result {
+        case .success(let newFeed):
+            update(feed: feed, to: newFeed)
+        case .failure(let error):
+            throw error
         }
     }
     
-    private func insert(newFeed: FKFeed, fromURL url: String, into context: ModelContext) {
+    private func insert(newFeed: FKFeed, fromURL url: URL, into context: ModelContext) {
         if let (feed, feedItems) = parse(remoteFeed: newFeed) {
             feed.url = url
             context.insert(feed)

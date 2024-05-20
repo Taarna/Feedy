@@ -11,7 +11,7 @@ import SwiftData
 @Model
 final class Feed {
     var id = UUID()
-    var url: String
+    var url: URL?
     var title: String
     var details: String?
     var imageURL: URL?
@@ -20,7 +20,7 @@ final class Feed {
     
     init(
         id: UUID = UUID(),
-        url: String,
+        url: URL? = nil,
         title: String,
         details: String? = nil,
         imageURL: URL? = nil,
