@@ -18,7 +18,6 @@
 		8D7B8D032BF564AE008F310B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D7B8D022BF564AE008F310B /* Preview Assets.xcassets */; };
 		8D7B8D0A2BF5667E008F310B /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B8D092BF5667E008F310B /* Feed.swift */; };
 		8D7B8D0C2BF56DA2008F310B /* AddFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B8D0B2BF56DA2008F310B /* AddFeed.swift */; };
-		8D8F92322BF7766A00880025 /* SVGView in Frameworks */ = {isa = PBXBuildFile; productRef = 8D8F92312BF7766A00880025 /* SVGView */; };
 		8D8F92392BF77E9900880025 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F92382BF77E9900880025 /* FeedCell.swift */; };
 		8D8F923B2BF7846F00880025 /* rss-logo.svg in Resources */ = {isa = PBXBuildFile; fileRef = 8D8F923A2BF7846F00880025 /* rss-logo.svg */; };
 		8D8F923E2BF7878B00880025 /* FeedItemsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F923D2BF7878B00880025 /* FeedItemsList.swift */; };
@@ -62,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D8F92322BF7766A00880025 /* SVGView in Frameworks */,
 				8DB4508C2BF62FC8001FCC1A /* FeedKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,7 +210,6 @@
 			name = Feedy;
 			packageProductDependencies = (
 				8DB4508B2BF62FC8001FCC1A /* FeedKit */,
-				8D8F92312BF7766A00880025 /* SVGView */,
 			);
 			productName = Feedy;
 			productReference = 8D7B8CF62BF564AA008F310B /* Feedy.app */;
@@ -244,7 +241,6 @@
 			mainGroup = 8D7B8CED2BF564AA008F310B;
 			packageReferences = (
 				8DB4508A2BF62FC8001FCC1A /* XCRemoteSwiftPackageReference "FeedKit" */,
-				8D8F92302BF7766A00880025 /* XCRemoteSwiftPackageReference "SVGView" */,
 			);
 			productRefGroup = 8D7B8CF72BF564AA008F310B /* Products */;
 			projectDirPath = "";
@@ -506,14 +502,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8D8F92302BF7766A00880025 /* XCRemoteSwiftPackageReference "SVGView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/exyte/SVGView.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.6;
-			};
-		};
 		8DB4508A2BF62FC8001FCC1A /* XCRemoteSwiftPackageReference "FeedKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/nmdias/FeedKit.git";
@@ -525,11 +513,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8D8F92312BF7766A00880025 /* SVGView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8D8F92302BF7766A00880025 /* XCRemoteSwiftPackageReference "SVGView" */;
-			productName = SVGView;
-		};
 		8DB4508B2BF62FC8001FCC1A /* FeedKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8DB4508A2BF62FC8001FCC1A /* XCRemoteSwiftPackageReference "FeedKit" */;

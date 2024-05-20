@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SVGView
 
 struct BaseCell: View {
     let imageURL: URL?
@@ -28,12 +27,18 @@ struct BaseCell: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                 
             } else {
-                SVGView(contentsOf: logoURL).frame(width: imageSize, height: imageSize)
+                Image(systemName: "questionmark.square.dashed")
+                    .resizable()
+                    .frame(width: imageSize, height: imageSize)
+                    .aspectRatio(contentMode: .fill)
+                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .foregroundColor(Color.accentColor)
             }
+            Spacer()
             VStack(alignment: .leading) {
                 Text(title).font(.headline)
                 if let details {
-                    Text(details).font(.footnote).lineLimit(2)
+                    Text(details).font(.footnote).lineLimit(4)
                 }
             }
         }

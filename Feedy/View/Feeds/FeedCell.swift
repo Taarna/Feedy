@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SVGView
 
 struct FeedCell: View {
     let feed: Feed

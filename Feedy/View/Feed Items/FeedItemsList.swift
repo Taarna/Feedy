@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SVGView
 
 struct FeedItemsList: View {
     @Environment(DataModel.self) private var dataModel
