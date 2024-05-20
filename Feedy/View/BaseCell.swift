@@ -8,13 +8,10 @@
 import SwiftUI
 
 struct BaseCell: View {
-    @Environment(\.colorScheme) var colorScheme
-    
     let imageURL: URL?
     let title: String
     let details: String?
     
-    private let logoURL = Bundle.main.url(forResource: "rss-logo", withExtension: "svg")!
     private let imageSize = 70.0
     
     var body: some View {
@@ -23,18 +20,13 @@ struct BaseCell: View {
                 AsyncImage(url: imageURL) { image in
                     image.resizable().aspectRatio(contentMode: .fit)
                 } placeholder: {
-                    ProgressView()
+                    PlaceholderImage()
                 }
                 .frame(width: imageSize, height: imageSize)
                 .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                 
             } else {
-                Image(systemName: "questionmark.square.dashed")
-                    .resizable()
-                    .frame(width: imageSize, height: imageSize)
-                    .aspectRatio(contentMode: .fill)
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
-                    .foregroundColor(colorScheme == .light ? .black : .white)
+                PlaceholderImage()
             }
             Spacer()
             VStack(alignment: .leading) {
@@ -44,5 +36,20 @@ struct BaseCell: View {
                 }
             }
         }
+    }
+}
+
+struct PlaceholderImage: View {
+    @Environment(\.colorScheme) var colorScheme
+    
+    private let imageSize = 70.0
+    
+    var body: some View {
+        Image(systemName: "questionmark.square.dashed")
+            .resizable()
+            .frame(width: imageSize, height: imageSize)
+            .aspectRatio(contentMode: .fill)
+            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .foregroundColor(colorScheme == .light ? .black : .white)
     }
 }

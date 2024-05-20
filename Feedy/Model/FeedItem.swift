@@ -28,7 +28,7 @@ final class FeedItem {
             self.title = title
             self.details = details
             self.imageURL = imageURL
-            self.link = link
+            self.link = nil
             self.feed = feed
         }
 }
