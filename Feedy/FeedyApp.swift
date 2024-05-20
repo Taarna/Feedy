@@ -11,10 +11,12 @@ import SwiftData
 @main
 struct FeedyApp: App {
     @StateObject private var dataModel: DataModel
+    @StateObject private var networkMonitor: NetworkMonitor
     
     init() {
         let remoteService = RemoteFeedService()
         _dataModel = StateObject(wrappedValue: DataModel(with: remoteService))
+        _networkMonitor = StateObject(wrappedValue: NetworkMonitor())
     }
     
     var sharedModelContainer: ModelContainer = {
@@ -35,6 +37,7 @@ struct FeedyApp: App {
         WindowGroup {
             FeedsList()
                 .environment(dataModel)
+                .environmentObject(networkMonitor)
         }
         .modelContainer(sharedModelContainer)
     }

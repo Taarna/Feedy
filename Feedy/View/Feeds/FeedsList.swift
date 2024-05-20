@@ -7,10 +7,13 @@
 
 import SwiftUI
 import SwiftData
+import AlertToast
 
 struct FeedsList: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(DataModel.self) private var dataModel
+    
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     
     @Query(filter: #Predicate<Feed>  { !$0.isFavorite })
     private var feeds: [Feed]
@@ -19,11 +22,13 @@ struct FeedsList: View {
     private var favoriteFeeds: [Feed]
     
     @State private var isAddFeedViewPresented = false
+    @State private var isToastPresented = false
+    @State private var toastMessage = ""
     
     var body: some View {
         NavigationSplitView {
             List {
-                if(favoriteFeeds.count > 0) {
+                if (favoriteFeeds.count > 0) {
                     Section("Favorites") {
                         ForEach(favoriteFeeds, id: \.id) { favoriteFeed in
                             FeedCell(feed: favoriteFeed)
@@ -54,16 +59,24 @@ struct FeedsList: View {
         } detail: {
             Text("Select an item")
         }
-        .sheet(isPresented: $isAddFeedViewPresented, onDismiss: {
-            
-        }) {
+        .toast(isPresenting: $isToastPresented){
+            AlertToast(displayMode: .hud, type: .regular, title: toastMessage)
+        }
+        .sheet(isPresented: $isAddFeedViewPresented) {
             AddFeed(isPresented: $isAddFeedViewPresented) { feedURL in
-                addFeed(withURL: feedURL)
+                addFeed(url: feedURL)
             }
         }
+        .onReceive(networkMonitor.$isConnected, perform: { isConnected in
+            if !isConnected {
+                toastMessage = "You are offline. Please check your internet connection."
+                isToastPresented = true
+            }
+        })
+        
     }
     
-    private func addFeed(withURL url: String) {
+    private func addFeed(url: String) {
         Task {
             await dataModel.add(feedUrl: url, into: modelContext)
         }
