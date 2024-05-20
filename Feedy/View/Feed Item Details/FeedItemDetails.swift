@@ -15,7 +15,11 @@ struct FeedItemDetails: View {
             WebView(url: url)
                 .navigationTitle(feedItem.title)
         } else {
-            Text("Invalid URL")
+            ContentUnavailableView(
+                "The link is missing for \"\(feedItem.title)\"",
+                systemImage: "exclamationmark.octagon",
+                description: nil
+            )
         }
     }
 }
