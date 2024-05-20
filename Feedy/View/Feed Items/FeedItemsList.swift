@@ -26,7 +26,7 @@ struct FeedItemsList: View {
         .navigationTitle(feed.title)
         .onAppear() {
             Task {
-                await dataModel.refreshFeed(feed: feed)
+                try await dataModel.refresh(feed: feed)
             }
         }
     }
