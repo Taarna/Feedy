@@ -11,8 +11,7 @@ import AlertToast
 
 struct FeedsList: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(DataModel.self) private var dataModel
-    
+    @EnvironmentObject var dataModel: DataModel
     @EnvironmentObject var networkMonitor: NetworkMonitor
     
     @Query(filter: #Predicate<Feed>  { !$0.isFavorite })
@@ -64,7 +63,9 @@ struct FeedsList: View {
         }
         .sheet(isPresented: $isAddFeedViewPresented) {
             AddFeed(isPresented: $isAddFeedViewPresented) { feedURL in
-                addFeed(url: feedURL)
+                Task {
+                    await addFeed(url: feedURL)
+                }
             }
         }
         .onReceive(networkMonitor.$isConnected, perform: { isConnected in
@@ -76,9 +77,16 @@ struct FeedsList: View {
         
     }
     
-    private func addFeed(url: String) {
-        Task {
-            await dataModel.add(feedUrl: url, into: modelContext)
+    @MainActor
+    private func addFeed(url: String) async {
+        do {
+            try await dataModel.add(feedUrl: url, into: modelContext)
+        } catch FeedyError.incorrectURL {
+            toastMessage = ErrorMessage.incorrectURL.rawValue
+            isToastPresented = true
+        } catch {
+            toastMessage = ErrorMessage.unknownError.rawValue
+            isToastPresented = true
         }
     }
     

@@ -10,7 +10,7 @@ import FeedKit
 
 final class RemoteFeedService {
     
-    func getFeed(with url: URL) async -> Result<FKFeed, Error> {
+    func getFeed(with url: URL) async -> Result<FKFeed, ParserError> {
         let parser = FeedParser(URL: url)
         
         return await withCheckedContinuation { continuation in

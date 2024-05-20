@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FeedItemsList: View {
-    @Environment(DataModel.self) private var dataModel
+    @EnvironmentObject var dataModel: DataModel
     
     let feed: Feed
     

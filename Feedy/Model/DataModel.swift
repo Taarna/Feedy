@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 import FeedKit
 
-@Observable
+@MainActor
 class DataModel: ObservableObject {
     private let remoteService: RemoteFeedService
     
@@ -17,15 +17,17 @@ class DataModel: ObservableObject {
         self.remoteService = remoteService
     }
     
-    func add(feedUrl url: String, into context: ModelContext) async {
-        if let feedURL = URL(string: url) {
-            let result = await remoteService.getFeed(with: feedURL)
-            switch result {
-            case .success(let newFeed):
-                insert(newFeed: newFeed, fromURL: url, into: context)
-            case .failure(let error):
-                print("Error")
-            }
+    func add(feedUrl url: String, into context: ModelContext) async throws {
+        guard let feedURL = URL(string: url) else {
+            throw FeedyError.incorrectURL
+        }
+            
+        let result = await remoteService.getFeed(with: feedURL)
+        switch result {
+        case .success(let newFeed):
+            insert(newFeed: newFeed, fromURL: url, into: context)
+        case .failure(let error):
+            throw error
         }
     }
     
@@ -48,9 +50,7 @@ class DataModel: ObservableObject {
     private func insert(newFeed: FKFeed, fromURL url: String, into context: ModelContext) {
         if let (feed, feedItems) = parse(remoteFeed: newFeed) {
             feed.url = url
-            
             context.insert(feed)
-            
             feedItems.forEach { feedItem in
                 feed.items.append(feedItem)
             }

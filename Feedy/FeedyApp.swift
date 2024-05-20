@@ -36,7 +36,7 @@ struct FeedyApp: App {
     var body: some Scene {
         WindowGroup {
             FeedsList()
-                .environment(dataModel)
+                .environmentObject(dataModel)
                 .environmentObject(networkMonitor)
         }
         .modelContainer(sharedModelContainer)
